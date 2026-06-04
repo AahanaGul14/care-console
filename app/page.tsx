@@ -63,3 +63,34 @@ export default function Home() {
     </div>
   );
 }
+
+/*'use client';
+
+import { ApolloProvider, useQuery, gql } from '@apollo/client';
+import { client } from '@/lib/apollo';
+
+const TEST_QUERY = gql`
+  query {
+    patients {
+      id
+      name
+    }
+  }
+`;
+
+function TestComponent() {
+  const { data, loading, error } = useQuery(TEST_QUERY);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return <p>✅ Connected! Patients in DB: {data.patients.length}</p>;
+}
+
+export default function Home() {
+  return (
+    <ApolloProvider client={client}>
+      <TestComponent />
+    </ApolloProvider>
+  );
+}*/
