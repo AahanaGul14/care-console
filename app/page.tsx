@@ -1,16 +1,29 @@
 import Link from 'next/link';
- 
+import Image from 'next/image';
+
 export default function Home() {
   return (
 <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
 <div className="max-w-md w-full">
  
-        <h1 className="text-3xl font-semibold text-gray-800 mb-1 text-center">
-          Care Console
-</h1>
-<p className="text-gray-400 text-sm text-center mb-10">
-          Apollo Health Axis · TeleHealth Platform
-</p>
+      <div className="flex flex-col items-center mb-10">
+  <Image
+    src="/images/Apollo_Hospitals_Logo.png"
+    alt="Apollo Health Axis"
+    width={120}
+    height={120}
+    className="mb-4"
+    priority
+  />
+
+  <h1 className="text-3xl font-semibold text-gray-800 mb-1 text-center">
+    Care Console
+  </h1>
+
+  <p className="text-gray-400 text-sm text-center">
+    Apollo Health Axis · TeleHealth Platform
+  </p>
+</div>
  
         <div className="space-y-4">
 <Link href="/register" className="flex items-center gap-4 bg-white rounded-xl shadow p-5 hover:shadow-md transition">
