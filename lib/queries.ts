@@ -54,3 +54,30 @@ export const GET_CASES = gql`
     }
   }
 `;
+export const GET_CASE_DETAIL = gql`
+  query GetCaseDetail($id: uuid!) {
+    telehealth_cases_by_pk(id: $id) {
+      id
+      status
+      paramedic_notes
+      doctor_diagnosis
+      medication
+      temporal_workflow_id
+      patient {
+        id name age symptoms emergency_flag assigned_paramedic
+      }
+    }
+  }
+`;
+export const DOCTOR_FOLLOWUP = gql`
+  mutation DoctorFollowup($id: uuid!, $diagnosis: String!, $medication: String!) {
+    update_telehealth_cases_by_pk(
+      pk_columns: { id: $id },
+      _set: {
+        doctor_diagnosis: $diagnosis,
+        medication: $medication,
+        status: "FOLLOWUP_REQUIRED"
+      }
+    ) { id status }
+  }
+`;
