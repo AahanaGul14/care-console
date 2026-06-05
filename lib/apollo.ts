@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 
 const httpLink = new HttpLink({
-  uri: 'http://172.31.34.113:8080/v1/graphql',
+  uri: 'http://localhost:8080/v1/graphql',
   headers: {
     'x-hasura-admin-secret': 'myadminsecretkey',
   },
