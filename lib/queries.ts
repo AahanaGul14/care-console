@@ -45,8 +45,12 @@ export const DOCTOR_CLOSE = gql`
 export const GET_CASES = gql`
   query GetCases($status: String!) {
     telehealth_cases(where: { status: { _eq: $status } }) {
-      id status paramedic_notes doctor_diagnosis
-      patient { id name age symptoms emergency_flag assigned_paramedic }
+      id
+      status
+      paramedic_notes
+      patient {
+        id name age symptoms emergency_flag assigned_paramedic
+      }
     }
   }
 `;
