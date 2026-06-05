@@ -81,10 +81,10 @@ export default function ParamedicPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Paramedic Notes *</label>
+              <label className="block text-sm text-black font-medium text-black-700 mb-1">Paramedic Notes *</label>
               <textarea
                 value={notes} onChange={e => setNotes(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Record vitals, observations, and initial assessment..."
                 rows={5}
               />
@@ -137,7 +137,7 @@ export default function ParamedicPage() {
                 <span className="bg-blue-100 text-blue-600 text-xs font-medium px-3 py-1 rounded-full">OPEN</span>
               </div>
               <p className="text-sm text-gray-400 mt-1">Age {c.patient.age} · {c.patient.symptoms?.slice(0, 60)}...</p>
-              <p className="text-xs text-gray-300 mt-2">Tap to open →</p>
+              <p className="text-xs text-red-300 mt-2">Tap to open →</p>
             </div>
           ))}
         </div>
