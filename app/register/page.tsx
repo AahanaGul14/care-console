@@ -19,6 +19,7 @@ export default function RegisterPage() {
   const [createPatient, { loading: creatingPatient }] = useMutation(CREATE_PATIENT);
   const [createCase, { loading: creatingCase }]       = useMutation(CREATE_CASE);
 
+
   const loading = creatingPatient || creatingCase;
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -30,37 +31,50 @@ export default function RegisterPage() {
   }
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError('');
+  e.preventDefault();
+  setError('');
 
-    if (!form.name.trim()) {
-      setError('Patient name is required.');
-      return;
-    }
-
-    try {
-      // Step 1 — create the patient
-      const { data: patientData } = await createPatient({
-        variables: {
-          name: form.name,
-          age: form.age ? parseInt(form.age) : null,
-          symptoms: form.symptoms,
-          emergency_flag: form.emergency_flag,
-          assigned_paramedic: form.assigned_paramedic,
-        },
-      });
-
-      const patientId = patientData.insert_patients_one.id;
-
-      // Step 2 — create the telehealth case linked to that patient
-      await createCase({ variables: { patient_id: patientId } });
-
-      setSubmitted(true);
-    } catch (err: any) {
-      setError('Something went wrong. Check your Hasura connection.');
-      console.error(err);
-    }
+  if (!form.name.trim()) {
+    setError('Patient name is required.');
+    return;
   }
+
+  try {
+    // Step 1 — create the patient
+    const { data: patientData } = await createPatient({
+      variables: {
+        name: form.name,
+        age: form.age ? parseInt(form.age) : null,
+        symptoms: form.symptoms,
+        emergency_flag: form.emergency_flag,
+        assigned_paramedic: form.assigned_paramedic,
+      },
+    });
+
+    const patientId = patientData.insert_patients_one.id;
+
+    // Step 2 — create the telehealth case linked to that patient
+    const caseResult = await createCase({
+      variables: { patient_id: patientId },
+    });
+
+    const newCaseId = caseResult.data.insert_telehealth_cases_one.id;
+
+    // Step 3 — start the Temporal workflow
+    await fetch('/api/start-workflow', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ caseId: newCaseId }),
+    });
+
+    setSubmitted(true);
+  } catch (err: any) {
+    setError('Something went wrong. Check your Hasura connection.');
+    console.error(err);
+  }
+}
 
   if (submitted) {
     return (
