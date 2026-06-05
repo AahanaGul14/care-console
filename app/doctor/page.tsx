@@ -121,19 +121,19 @@ function CaseDetail({ caseItem, onBack, onDone }: {
 </div>
 <StatusBadge status={caseItem.status} />
 </div>
-<p className="text-sm text-gray-400 mb-4">
+<p className="text-sm text-black mb-4">
             Age: {caseItem.patient.age} · Paramedic: {caseItem.patient.assigned_paramedic}
 </p>
  
           <div className="bg-gray-50 rounded-lg p-4 mb-3">
-<p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Symptoms</p>
+<p className="text-xs text-red-700 font-semibold uppercase tracking-wide mb-1">Symptoms</p>
 <p className="text-sm text-gray-700">
               {caseItem.patient.symptoms || 'None recorded'}
 </p>
 </div>
  
           <div className="bg-blue-50 rounded-lg p-4">
-<p className="text-xs text-blue-400 uppercase tracking-wide mb-1">
+<p className="text-xs text-blue-700 font-semibold uppercase tracking-wide mb-1">
               Paramedic Notes
 </p>
 <p className="text-sm text-gray-700">
@@ -162,7 +162,7 @@ function CaseDetail({ caseItem, onBack, onDone }: {
 <textarea
                 value={diagnosis}
                 onChange={e => setDiagnosis(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter your diagnosis..."
                 rows={3}
               />
@@ -175,7 +175,7 @@ function CaseDetail({ caseItem, onBack, onDone }: {
 <textarea
                 value={medication}
                 onChange={e => setMedication(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Prescribe medication or treatment plan..."
                 rows={2}
               />
@@ -271,10 +271,10 @@ export default function DoctorPage() {
 </div>
 <StatusBadge status={c.status} />
 </div>
-<p className="text-sm text-gray-400">
-                Age {c.patient.age} · {c.patient.symptoms?.slice(0, 60)}...
+<p className="text-sm text-blue-700">
+                Age {c.patient.age} · {c.patient.symptoms?.slice(0, 60)} 
 </p>
-<div className="mt-2 text-xs text-gray-300">
+<div className="mt-2 text-xs text-black">
                 Paramedic: {c.patient.assigned_paramedic} · Tap to review →
 </div>
 </div>
